@@ -16,7 +16,8 @@ const router = createBrowserRouter(
       <Route index={true} path='/' element={<HomeScreen />} />
       <Route path='/product/:id' element={<ProductScreen />} />
     </Route>
-  )
+  ),
+  { basename: process.env.PUBLIC_URL }
 );
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
