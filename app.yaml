@@ -1,0 +1,22 @@
+name: e-commerce
+region: blr1
+services:
+  - name: backend
+    github:
+      repo: mayankraghuwanshi/e-commerce-fe
+      repo_name: e-commerce-fe
+      branch: main
+      deploy_on_push: true
+    envs:
+      - key: USE_NPM_INSTALL
+        scope: BUILD_TIME
+        value: "true"
+    instance_count: 1
+    instance_size_slug: apps-s-1vcpu-0.5gb	
+    build_command: npm install && npm run build
+    run_command: npm start
+    buildpacks:
+      - digitalocean/nodejs-appdetect@v0.0.6
+      - heroku/nodejs@v0.284.4
+      - digitalocean/procfile@v0.0.5
+      - digitalocean/custom@v0.1.3 
