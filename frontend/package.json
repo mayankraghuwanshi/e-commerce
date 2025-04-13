@@ -3,6 +3,7 @@
   "homepage": "https://krishankraghuvanshi.github.io/e-commerce",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:5001",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.7.2",
     "@testing-library/dom": "^10.4.0",

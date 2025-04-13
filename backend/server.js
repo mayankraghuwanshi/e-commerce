@@ -5,6 +5,8 @@ import cors from 'cors'
 import products from './data/products.js'
 dotenv.config()
 
+import connectDB from './config/db.js'
+
 const port = process.env.PORT || 5001
 
 const app = express()
