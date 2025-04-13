@@ -17,7 +17,7 @@ const importData = async () => {
     try {
         await Order.deleteMany()
         await Product.deleteMany()
-        await User.daleteMany()
+        await User.deleteMany()
 
         const createdUser =  await User.insertMany(users)
         
@@ -29,7 +29,7 @@ const importData = async () => {
 
         await Product.insertMany(sampleProduct)
 
-        console.log("data Imported".green.inverse)
+        console.log("data Imported!".green.inverse)
 
         process.exit()
     }
@@ -43,7 +43,7 @@ const destroyData = async () => {
     try{
         await Order.deleteMany()
         await Product.deleteMany()
-        await User.daleteMany()
+        await User.deleteMany()
 
         console.log('data Destroyed!'.red.inverse)
         process.exit()
