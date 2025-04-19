@@ -15,8 +15,11 @@ router.get('/:id', asyncHandler(async (req, res) => {
     const product = await Product.findById(req.params.id)
     if (product){
         res.json(product)
+    }else{
+        res.status(404)
+        throw new Error('resource Not Found')
     }
-    res.status(404).json({message: 'Product is not found'})
+    
 }))
 
 export default router
