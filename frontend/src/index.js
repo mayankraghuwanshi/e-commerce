@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';  // Add this line
-
+import { Provider } from 'react-redux';
+import store from './store';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
@@ -23,8 +24,9 @@ const router = createBrowserRouter(
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    {/* <Provider store={store}> */}
+      <RouterProvider router={router} />
+    {/* </Provider> */}
   </React.StrictMode>
 );
-
 reportWebVitals();
