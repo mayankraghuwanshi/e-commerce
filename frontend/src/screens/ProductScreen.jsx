@@ -10,7 +10,9 @@ import {addToCart} from '../slices/cartSlice'
 
 
 const ProductScreen = () => {
+    //use params used for product's details to show when someone visits a specific product URL.
     const {id: productId} = useParams()
+    
     const [qty, setQty] = useState(1)
     const dispatch = useDispatch()
     const navigate = useNavigate()
