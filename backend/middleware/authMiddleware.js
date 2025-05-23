@@ -7,31 +7,31 @@ const protect = asyncHandler(async (req, res, next) => {
     let token
 
     //read the jwt from cookie
-    token = req.cookie.jwt
+    token = req.cookies.jwt
 
     if (token) {
-        try{
-            const decoded = jwt.verify(jwt, process.env.JWT_SECRET)
-            req.user = await User.findById(decoded.useId).select("-password")
+        try {
+            const decoded = jwt.verify(token, process.env.JWT_SECRET)
+            req.user = await User.findById(decoded.userId).select("-password")
             next()
-
-        }catch(error){
+        } catch (error) {
             res.status(401)
             throw new Error('Not authorized, token failed')
         }
-    }else{
+    } else {
         res.status(401)
-        throw new Error('NOT authorized, no token')
+        throw new Error('Not authorized, no token')
     }
 })
 
 //admin middleware
 const admin = (req, res, next) => {
-    if (req.user && req.user.isAdmin) {
+    if (req.user && req.user.isadmin) {
         next()
-    }else {
+    } else {
         res.status(401)
         throw new Error('Not authorized as admin')
     }
 }
-export { protect , admin}
+
+export { protect, admin }

@@ -11,33 +11,26 @@ const authUser = asyncHandler(async (req, res) => {
     const {email, password} = req.body
     const user = await User.findOne({email})
     
-    if (user) {
-        const isMatch = await user.matchPassword(password)
-        console.log('Password match result:', isMatch)
-    }
-
     if (user && (await user.matchPassword(password))) {
-
-        const token = jwt.sign({userId: user._id}, process.env.JWT_SECRET, {
+        const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
             expiresIn: '30d'
         })
 
-        //Set JWT as HTTP-Only cookies
+        // Set JWT as HTTP-Only cookie
         res.cookie('jwt', token, {
-            httpOnly : true,
+            httpOnly: true,
             secure: process.env.NODE_ENV !== 'development',
             sameSite: 'strict',
-            maxAge: 30*24*60*60*1000//30days
+            maxAge: 30 * 24 * 60 * 60 * 1000 // 30 days
         })
 
-
         res.json({
-            _id : user._id,
+            _id: user._id,
             name: user.name,
             email: user.email,
             isAdmin: user.isadmin
         })
-    }else{
+    } else {
         res.status(401)
         throw new Error('Invalid email or password')
     }
@@ -86,7 +79,11 @@ const registerUser = asyncHandler(async (req, res) => {
 //@routes POST /api/user/logout
 //@access private
 const logoutUser = asyncHandler(async (req, res) => {
-    res.send('logout user')
+    res.cookie('jwt', '', {
+        httpOnly: true,
+        expires: new Date(0)
+    })
+    res.status(200).json({message: 'Logged out successfully'})
 })
 
 //@desc Get user profile

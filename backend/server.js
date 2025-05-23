@@ -23,7 +23,10 @@ app.use(express.urlencoded({extended : true}))
 app.use(cookieParser())
 
 // Enable CORS
-app.use(cors())
+app.use(cors({
+    origin: 'http://localhost:3000',
+    credentials: true
+}))
 
 app.get('/', (req, res) => {
     res.send('API is running')
