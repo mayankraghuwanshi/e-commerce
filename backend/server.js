@@ -25,7 +25,9 @@ app.use(cookieParser())
 // Enable CORS
 app.use(cors({
     origin: 'http://localhost:3000',
-    credentials: true
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization']
 }))
 
 app.get('/', (req, res) => {
