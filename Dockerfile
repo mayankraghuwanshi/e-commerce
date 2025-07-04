@@ -1,25 +1,24 @@
 # Use official Node.js LTS image
-FROM node:20-alpine
+FROM node:23.10.0-alpine
 
-# Set working directory
 WORKDIR /app
 
-# Copy package.json and package-lock.json
+# Copy only package files first for better caching
 COPY package.json ./
+COPY package-lock.json ./
 COPY backend/package.json ./backend/
 COPY frontend/package.json ./frontend/
 
 # Install dependencies for both backend and frontend
 RUN npm run install:all
 
-# Copy the rest of the application code
+# Now copy the rest of the code
 COPY . .
+RUN ls
 
 # Build the frontend
 RUN npm run build
 
-# Expose the backend port
 EXPOSE 5001
 
-# Start the backend server
 CMD ["npm", "run", "start"]
