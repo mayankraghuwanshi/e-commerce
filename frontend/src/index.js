@@ -8,18 +8,31 @@ import store from './store';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import PrivateRoute from './components/PrivateRoute'
 import HomeScreen from './screens/HomeScreen';
 import ProductScreen from './screens/ProductScreen';
 import CartScreen from './screens/cartScreen'
 import LoginScreen from './screens/loginScreens'
+import RegisterScreen from './screens/registerScreen'
+import ShippingScreen from './screens/ShippingScreen'
+import PaymentScreen from './screens/PaymentScreen'
+import PlaceOrderScreen from './screens/PlaceOrderScreen'
+import ErrorBoundary from './components/ErrorBoundary'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path='/' element={<App />}>
+    <Route path='/' element={<App />} errorElement={<ErrorBoundary />}>
       <Route index={true} path='/' element={<HomeScreen />} />
       <Route path='/product/:id' element={<ProductScreen />} />
       <Route path='/cart' element={<CartScreen />} />
       <Route path='/login' element={<LoginScreen />} />
+      <Route path='/register' element={<RegisterScreen />} />
+      {/* <Route path='/shipping' element={<ShippingScreen />} /> */}
+      <Route path='' element={<PrivateRoute />}>
+        <Route path='/shipping' element={<ShippingScreen />} />
+        <Route path='/payment' element={<PaymentScreen />} />
+        <Route path='/placeorder' element={<PlaceOrderScreen />} />
+      </Route>
      </Route>
   ),
   { basename: process.env.PUBLIC_URL }
